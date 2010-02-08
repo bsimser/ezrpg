@@ -1,4 +1,4 @@
-{include file="header.tpl" TITLE="City"}
+{include file="header.tpl" TITLE="Event Log"}
 
 {if $logs}
 	<form method="post" action="index.php?mod=EventLog&act=clear">

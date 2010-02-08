@@ -22,12 +22,12 @@ $_SESSION['verify_code'] = $verify_code;
 
 function makeRBGColor($color, $image)
 {
-	$color = str_replace("#", "", $color);
-	$red = hexdec(substr($color, 0, 2));
-	$green = hexdec(substr($color, 2, 2));
-	$blue = hexdec(substr($color, 4, 2));
-	$out = ImageColorAllocate($image, $red, $green, $blue);
-	return $out;
+    $color = str_replace("#", "", $color);
+    $red = hexdec(substr($color, 0, 2));
+    $green = hexdec(substr($color, 2, 2));
+    $blue = hexdec(substr($color, 4, 2));
+    $out = ImageColorAllocate($image, $red, $green, $blue);
+    return $out;
 }
 
 $wordBox = imageftbbox($fontSize, 0, $font, $verify_string);
@@ -63,11 +63,11 @@ $line = ImageColorAllocate($captchaImage, $rred, $rgreen, $rblue);
 
 for($i = 0; $i < 10; $i++)
 {
-	$xStart = mt_rand(0, $containerWidth);
-	$yStart = mt_rand(0, $containerHeight);
-	$xEnd = mt_rand(0, $containerWidth);
-	$yEnd = mt_rand(0, $containerHeight);
-	imageline($captchaImage, $xStart, $yStart, $xEnd, $yEnd, $line);
+    $xStart = mt_rand(0, $containerWidth);
+    $yStart = mt_rand(0, $containerHeight);
+    $xEnd = mt_rand(0, $containerWidth);
+    $yEnd = mt_rand(0, $containerHeight);
+    imageline($captchaImage, $xStart, $yStart, $xEnd, $yEnd, $line);
 }
 
 

@@ -31,16 +31,17 @@ $purifier_config->set('URI', 'MakeAbsolute', true);
 //Variables
 $purifier = new HTMLPurifier($purifier_config);
 $tpl = new Smarty();
+
 try
 {
-	$db = DbFactory::factory($config_driver, $config_server, $config_username, $config_password, $config_dbname);
+    $db = DbFactory::factory($config_driver, $config_server, $config_username, $config_password, $config_dbname);
 }
 catch (DbException $e)
 {
-	$e->__toString();
+    $e->__toString();
 }
 
-//Database password no longer needed, unset for safety
+//Database password no longer needed, unset variable
 unset($config_password);
 
 //Smarty
@@ -52,12 +53,11 @@ $tpl->cache_dir    = CUR_DIR . '/smarty/cache/';
 //Messages for the user
 if ($_GET['msg'])
 {
-	$_msg = trim(stripslashes($_GET['msg']));
-	$_msg = $purifier->purify($_msg);
-	if (!empty($_msg))
-		$tpl->assign('GET_MSG', $_msg);
+    $_msg = trim(stripslashes($_GET['msg']));
+    $_msg = $purifier->purify($_msg);
+    if (!empty($_msg))
+        $tpl->assign('GET_MSG', $_msg);
 }
-
 
 $player = 0;
 
@@ -66,29 +66,29 @@ $session_check = sha1($_SESSION['userid'] . $_SERVER['REMOTE_ADDR'] . SECRET_KEY
 
 if ($_SESSION['hash'] == $session_check)
 {
-	//Select player details
-	$player = $db->fetchRow("SELECT * FROM <ezrpg>players WHERE id=?", array($_SESSION['userid']));	
-	$tpl->assign('player', $player);
-	
-	//Set logged in flag
-	define('LOGGED_IN', true);
-	$tpl->assign('LOGGED_IN', 'TRUE');
-	
-	//Update last_active value for the player
-	$query = $db->execute("UPDATE <ezrpg>players SET last_active=? WHERE id=?", array(time(), $player->id));
-	
-	//Check for new log messages and send to template
-	$tpl->assign('new_logs', checkLog($player->id, $db));
+    //Select player details
+    $player = $db->fetchRow("SELECT * FROM <ezrpg>players WHERE id=?", array($_SESSION['userid']));	
+    $tpl->assign('player', $player);
+    
+    //Set logged in flag
+    define('LOGGED_IN', true);
+    $tpl->assign('LOGGED_IN', 'TRUE');
+    
+    //Update last_active value for the player
+    $query = $db->execute("UPDATE <ezrpg>players SET last_active=? WHERE id=?", array(time(), $player->id));
+    
+    //Check for new log messages and send to template
+    $tpl->assign('new_logs', checkLog($player->id, $db));
 }
 else
 {
-	if (isset($_SESSION['hash']))
-		unset($_SESSION['hash']);
-	
-	if (isset($_SESSION['userid']))
-		unset($_SESSION['userid']);
-	
-	define('LOGGED_IN', false);
+    if (isset($_SESSION['hash']))
+        unset($_SESSION['hash']);
+    
+    if (isset($_SESSION['userid']))
+        unset($_SESSION['userid']);
+    
+    define('LOGGED_IN', false);
 }
 
 
