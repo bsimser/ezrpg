@@ -8,8 +8,8 @@
 <p>
 <a href="index.php">Home</a><br />
 <a href="index.php?mod=EventLog">Event Log</a><br />
-<a href="index.php?mod=Mail">Mail Box</a><br />
-<a href="index.php?mod=Items">Inventory</a><br />
+Mail Box<br />
+Inventory<br />
 <a href="index.php?mod=Account">Account Settings</a><br />
 </p>
 
@@ -19,16 +19,16 @@
 <h3>World</h3>
 <p>
 <a href="index.php?mod=Members">Members List</a><br />
-<a href="index.php?mod=Rankings">Top Players</a><br />
-<a href="index.php?mod=Statistics">Game Statistics</a><br />
-<a href="index.php?mod=Forum">Forum</a><br />
+Top Players<br />
+Game Statistics<br />
+Forum<br />
 </p>
 
 
 <h3>City</h3>
 <p>
 <a href="index.php?mod=Battle">Battle</a><br />
-<a href="index.php?mod=Shop">Item Shop</a><br />
+Item Shop<br />
 </p>
 
 </div>
