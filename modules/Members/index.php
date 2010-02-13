@@ -22,7 +22,7 @@ class Module_Members
 	
     /*
       Function: __construct
-      Begins the memebrs list page.
+      Begins the members list page.
 	
       If the user is logged in, it saves the database, smarty and player variables as class variables, then displays the page.
 	

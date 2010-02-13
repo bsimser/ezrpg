@@ -17,3 +17,12 @@ Output buffering - file:///C:/Users/Andy/Documents/Docs/php/outcontrol.configura
  
 class.dbexception.php
  - Less string concats, make it one huge string (heredoc?)
+
+
+------------------------------
+Optimize database (add proper indexes).
+Change hashing algorithm - no double hashing. (login/register/account settings modules, maybe init.php)
+Fix module comments.
+Go through all the database queries and:
+  Optimize database (add proper indexes)
+  Rewrite queries correctly

@@ -10,7 +10,7 @@
 <a href="index.php?mod=EventLog">Event Log</a><br />
 Mail Box<br />
 Inventory<br />
-<a href="index.php?mod=Account">Account Settings</a><br />
+<a href="index.php?mod=AccountSettings">Account Settings</a><br />
 </p>
 
 </div>

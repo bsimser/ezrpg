@@ -28,7 +28,7 @@
 	<li><a href="index.php?mod=Items">Inventory</a></li>
 	<li><a href="index.php?mod=City">City</a></li>
 	<li><a href="index.php?mod=Members">Members</a></li>
-	<li><a href="index.php?mod=Account">Account</a></li>
+	<li><a href="index.php?mod=AccountSettings">Account</a></li>
 	<li><a href="index.php?mod=Logout">Log Out</a></li>
 	{else}
 	<li><a href="index.php">Home</a></li>
