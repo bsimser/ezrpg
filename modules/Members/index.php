@@ -9,18 +9,6 @@ defined('IN_EZRPG') or exit;
 class Module_Members
 {
     /*
-      Variable: $db
-      Contains the database object.
-    */
-    private $db;
-	
-    /*
-      Variable: $player
-      The currently logged in player. Value is 0 if no user is logged in.
-    */
-    private $player;
-	
-    /*
       Function: __construct
       Begins the members list page.
 	
@@ -38,7 +26,7 @@ class Module_Members
         //Require login
         requireLogin();
         
-        $query = $db->execute('SELECT `username`, `level` FROM <ezrpg>players ORDER BY `id` ASC LIMIT 20');
+        $query = $db->execute('SELECT `username`, `level` FROM `<ezrpg>players` ORDER BY `id` ASC LIMIT 50');
         $members = Array();
         
         while ($m = $db->fetch($query))
