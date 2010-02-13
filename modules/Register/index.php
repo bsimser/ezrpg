@@ -172,7 +172,7 @@ class Module_Register
             $errors[] = 'You didn\'t enter the verification code!';
             $error = 1;
         }
-        else if ($_SESSION['verify_code'] != sha1(sha1(SECRET_KEY . strtoupper($_POST['reg_verify']) . SECRET_KEY2) . SECRET_KEY))
+        else if ($_SESSION['verify_code'] != sha1(strtoupper($_POST['reg_verify']) . SECRET_KEY))
         {
             $errors[] = 'You didn\'t enter the correct verification code!';
             $error = 1;
@@ -191,7 +191,7 @@ class Module_Register
             $insert['username'] = $_POST['username'];
             $insert['email'] = $_POST['email'];
             $insert['secret_key'] = createKey(1024);
-            $insert['password'] = sha1(sha1($insert['secret_key'] . $_POST['password'] . SECRET_KEY2) . SECRET_KEY);
+            $insert['password'] = sha1($insert['secret_key'] . $_POST['password'] . SECRET_KEY);
             $insert['registered'] = time();
             
             $new_player = $this->db->insert('<ezrpg>players', $insert);

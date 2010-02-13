@@ -67,7 +67,7 @@ $session_check = sha1($_SESSION['userid'] . $_SERVER['REMOTE_ADDR'] . SECRET_KEY
 if ($_SESSION['hash'] == $session_check)
 {
     //Select player details
-    $player = $db->fetchRow("SELECT * FROM <ezrpg>players WHERE id=?", array($_SESSION['userid']));	
+    $player = $db->fetchRow('SELECT * FROM `<ezrpg>players` WHERE `id`=?', array($_SESSION['userid']));	
     $tpl->assign('player', $player);
     
     //Set logged in flag
@@ -75,7 +75,7 @@ if ($_SESSION['hash'] == $session_check)
     $tpl->assign('LOGGED_IN', 'TRUE');
     
     //Update last_active value for the player
-    $query = $db->execute("UPDATE <ezrpg>players SET last_active=? WHERE id=?", array(time(), $player->id));
+    $query = $db->execute('UPDATE `<ezrpg>players` SET `last_active`=? WHERE `id`=?', array(time(), $player->id));
     
     //Check for new log messages and send to template
     $tpl->assign('new_logs', checkLog($player->id, $db));
@@ -93,7 +93,7 @@ else
 
 
 //Online players
-$query = $db->fetchRow("SELECT COUNT(id) AS count FROM <ezrpg>players WHERE last_active>?", array((time()-(60*5))));
+$query = $db->fetchRow('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players` WHERE `last_active`>?', array((time()-(60*5))));
 $online = $query->count;
 
 $tpl->assign('ONLINE', $online);

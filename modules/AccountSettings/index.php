@@ -55,7 +55,7 @@ class Module_AccountSettings
         }
         else
         {
-            $check = sha1(sha1($this->player->secret_key . $_POST['current_password'] . SECRET_KEY2) . SECRET_KEY);
+            $check = sha1($this->player->secret_key . $_POST['current_password'] . SECRET_KEY);
             if ($check != $this->player->password)
             {
                 $msg = 'The password you entered does not match this account\'s password.';
@@ -70,7 +70,7 @@ class Module_AccountSettings
             }
             else
             {
-                $new_password = sha1(sha1($this->player->secret_key . $_POST['new_password2'] . SECRET_KEY2) . SECRET_KEY);
+                $new_password = sha1($this->player->secret_key . $_POST['new_password2'] . SECRET_KEY);
                 $this->db->execute('UPDATE `<ezrpg>players` SET `password`=? WHERE `id`=?', array($new_password, $this->player->id));
                 $msg = 'You have changed your password.';
             }

@@ -49,7 +49,7 @@ class Module_Login
         else
         {
             $player = $db->fetch($query);
-            $check = sha1(sha1($player->secret_key . $_POST['password'] . SECRET_KEY2) . SECRET_KEY);
+            $check = sha1($player->secret_key . $_POST['password'] . SECRET_KEY);
             if ($check != $player->password)
             {
                 $errors[] = 'Please check your username/password!';

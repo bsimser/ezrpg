@@ -16,7 +16,7 @@ $l3 = strtoupper(createKey(1, 1));
 $l4 = strtoupper(createKey(1, 1));
 $verify_string = $l1 . ' ' . $l2 . ' ' . $l3 . ' ' . $l4;
 $real_string = $l1 . $l2 . $l3 . $l4;
-$verify_code = sha1(sha1(SECRET_KEY . strtoupper($real_string) . SECRET_KEY2) . SECRET_KEY);
+$verify_code = sha1(strtoupper($real_string) . SECRET_KEY);
 
 $_SESSION['verify_code'] = $verify_code;
 
