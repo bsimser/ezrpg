@@ -11,10 +11,6 @@ require_once(LIB_DIR . '/func.log.php');
 require_once(LIB_DIR . '/func.rand.php');
 require_once(LIB_DIR . '/func.text.php');
 require_once(LIB_DIR . '/func.player.php');
-//require_once(LIB_DIR . '/function_error.php');
-//require_once(LIB_DIR . '/function_forum.php');
-//require_once(LIB_DIR . '/function_pagination.php');
-//require_once(LIB_DIR . '/function_player.php');
 
 //Classes
 require_once(LIB_DIR . '/class.dbfactory.php');
