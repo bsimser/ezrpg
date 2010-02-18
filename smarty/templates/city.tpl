@@ -27,7 +27,7 @@ Forum<br />
 
 <h3>City</h3>
 <p>
-<a href="index.php?mod=Battle">Battle</a><br />
+Battle<br />
 Item Shop<br />
 </p>
 

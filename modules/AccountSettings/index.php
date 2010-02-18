@@ -6,43 +6,24 @@ defined('IN_EZRPG') or exit;
   Class: Module_AccountSettings
   Lets the user change their password.
 */
-class Module_AccountSettings
+class Module_AccountSettings extends Base_Module
 {
     /*
-      Variable: $db
-      Contains the database object.
-    */
-    private $db;
-	
-    /*
-      Variable: $player
-      The currently logged in player. Value is 0 if no user is logged in.
-    */
-    private $player;
-	
-    /*
-      Function: __construct
+      Function: start
       Begins the account settings page/
-	
-      Parameters:
-      $db - An instance of the database class.
-      $tpl - A Smarty object.
-      $player - A player result set from the database, or 0 if not logged in.
     */
-    public function __construct(&$db, &$tpl, &$player=0)
+    public function start()
     {
         //Require login
         requireLogin();
         
         if (isset($_POST['change_password']))
         {
-            $this->db = $db;
-            $this->player = $player;
             $this->changePassword();
         }
         else
         {
-            $tpl->display('account_settings.tpl');
+            $this->tpl->display('account_settings.tpl');
         }
     }
 

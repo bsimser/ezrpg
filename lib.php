@@ -5,41 +5,33 @@ defined('IN_EZRPG') or exit;
 //Requires
 
 //Config
-require_once(CUR_DIR . '/config.php');
+require_once (CUR_DIR . '/config.php');
 //Functions
-require_once(LIB_DIR . '/func.log.php');
-require_once(LIB_DIR . '/func.rand.php');
-require_once(LIB_DIR . '/func.text.php');
-require_once(LIB_DIR . '/func.player.php');
+require_once (LIB_DIR . '/func.log.php');
+require_once (LIB_DIR . '/func.rand.php');
+require_once (LIB_DIR . '/func.text.php');
+require_once (LIB_DIR . '/func.player.php');
 
 //Classes
-require_once(LIB_DIR . '/class.dbfactory.php');
-require_once(LIB_DIR . '/class.imagebar.php');
-require_once(LIB_DIR . '/class.module.php');
+require_once (LIB_DIR . '/class.dbfactory.php');
+require_once (LIB_DIR . '/class.imagebar.php');
+require_once (LIB_DIR . '/class.modulefactory.php');
+require_once (LIB_DIR . '/class.base_module.php');
 
 //Exceptions
-require_once(LIB_DIR . '/exception.db.php');
+require_once (LIB_DIR . '/exception.db.php');
 
 //Constants
-require_once(LIB_DIR . '/const.errors.php');
-
-//Items
-require_once(LIB_DIR . '/items/class.Item.php');
-require_once(LIB_DIR . '/items/class.EquipItem.php');
-require_once(LIB_DIR . '/items/class.UsableItem.php');
-require_once(LIB_DIR . '/items/class.UselessItem.php');
-require_once(LIB_DIR . '/items/class.OneHealingItem.php');
-require_once(LIB_DIR . '/items/class.MultiHealingItem.php');
-require_once(LIB_DIR . '/items/class.Weapon.php');
+require_once (LIB_DIR . '/const.errors.php');
 
 
 //External Libraries
 //HTML Purifier
-require_once(EXT_DIR . '/htmlpurifier/HTMLPurifier.auto.php');
-require_once(EXT_DIR . '/htmlpurifier/HTMLPurifier/Filter/ExtractStyleBlocks.php');
+require_once (EXT_DIR . '/htmlpurifier/HTMLPurifier.auto.php');
+require_once (EXT_DIR . '/htmlpurifier/HTMLPurifier/Filter/ExtractStyleBlocks.php');
 //CSS Tidy
-require_once(EXT_DIR . '/csstidy/class.csstidy.php');
-require_once(EXT_DIR . '/csstidy/class.csstidy_print.php');
+require_once (EXT_DIR . '/csstidy/class.csstidy.php');
+require_once (EXT_DIR . '/csstidy/class.csstidy_print.php');
 //Smarty
-require_once(EXT_DIR . '/smarty/Smarty.class.php');
+require_once (EXT_DIR . '/smarty/Smarty.class.php');
 ?>

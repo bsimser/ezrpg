@@ -6,42 +6,17 @@ defined('IN_EZRPG') or exit;
   Class: Module_Register
   This module handles adding new players to the database.
 */
-class Module_Register
+class Module_Register extends Base_Module
 {
     /*
-      Variable: $db
-      Contains the database object.
-    */
-    private $db;
-	
-    /*
-      Variable: $tpl
-      The smarty object.
-    */
-    private $tpl;
-	
-    /*
-      Variable: $player
-      The currently logged in player. Value is 0 if no user is logged in.
-    */
-    private $player;
-	
-    /*
-      Function: __construct
+      Function: start()
       Displays the registration form by default.
-	
-      Parameters:
-      The parameters are passed by reference so that all modules and other code use the same objects.
-	
-      $db - An instance of the database class.
-      $tpl - A Smarty object.
-      $player - A player result set from the database, or 0 if not logged in.
-	
+      
       See Also:
       - <render>
       - <register>
     */
-    public function __construct(&$db, &$tpl, &$player=0)
+    public function start()
     {
         if (LOGGED_IN)
         {
@@ -50,10 +25,6 @@ class Module_Register
         }
         else
         {
-            $this->db = $db;
-            $this->tpl = $tpl;
-            $this->player = $player;
-            
             //If the form was submitted, process it in register().
             if ($_POST['register'])
                 $this->register();
@@ -97,7 +68,7 @@ class Module_Register
         $errors = Array();
 		
         //Check username
-        $result = $this->db->fetchRow('SELECT COUNT(id) AS count FROM <ezrpg>players WHERE username=?', array($_POST['username']));
+        $result = $this->db->fetchRow('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players` WHERE `username`=?', array($_POST['username']));
         if (empty($_POST['username']))
         {
             $errors[] = 'You didn\'t enter your username!';
@@ -138,7 +109,7 @@ class Module_Register
         }
 	
         //Check email
-        $result = $this->db->fetchRow('SELECT COUNT(id) AS count FROM <ezrpg>players WHERE email=?', array($_POST['email']));
+        $result = $this->db->fetchRow('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players` WHERE `email`=?', array($_POST['email']));
         if (empty($_POST['email']))
         {
             $errors[] = 'You didn\'t enter your email!';

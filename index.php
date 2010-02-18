@@ -1,10 +1,13 @@
 <?php
 define('IN_EZRPG', true);
 
-require_once('init.php');
+require_once 'init.php';
 
-if (ctype_alnum($_GET['mod']))
-    $module = new Module($db, $tpl, $player, $_GET['mod']);
-else
-    $module = new Module($db, $tpl, $player);
+$default_mod = 'Index';
+
+$module_name = ( (isset($_GET['mod']) && ctype_alnum($_GET['mod']))  ? $_GET['mod'] : $default_mod );
+
+$module = ModuleFactory::factory($db, $tpl, $player, $module_name);
+
+$module->start();
 ?>

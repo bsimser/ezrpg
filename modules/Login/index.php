@@ -6,24 +6,17 @@ defined('IN_EZRPG') or exit;
   Class: Module_Login
   This module handles user authentication.
 */
-class Module_Login
+class Module_Login extends Base_Module
 {
     /*
-      Function: __construct
+      Function: start
       Checks player details to login the player.
 	
       If successful, a new session is generated and the user is redirected to the game.
 	
       On failure, session data is cleared and the user is redirected back to the login page.
-	
-      Parameters:
-      The parameters are passed by reference so that all modules and other code use the same objects.
-	
-      $db - An instance of the database class.
-      $tpl - A Smarty object.
-      $player - A player result set from the database, or 0 if not logged in.
     */
-    public function __construct(&$db, &$tpl, &$player=0)
+    public function start()
     {
         $error = 0; //Error count
         $errors = Array();
@@ -40,15 +33,15 @@ class Module_Login
             $error = 1;
         }
         
-        $query = $db->execute('SELECT id, username, password, secret_key FROM <ezrpg>players WHERE username=?', array($_POST['username']));
-        if ($db->numRows($query) == 0)
+        $query = $this->db->execute('SELECT `id`, `username`, `password`, `secret_key` FROM `<ezrpg>players` WHERE `username`=?', array($_POST['username']));
+        if ($this->db->numRows($query) == 0)
         {
             $errors[] = 'Please check your username/password!';
             $error = 1;
         }
         else
         {
-            $player = $db->fetch($query);
+            $player = $this->db->fetch($query);
             $check = sha1($player->secret_key . $_POST['password'] . SECRET_KEY);
             if ($check != $player->password)
             {
@@ -59,7 +52,7 @@ class Module_Login
         
         if ($error == 0)
         {
-            $query = $db->execute('UPDATE <ezrpg>players SET last_login=? WHERE id=?', array(time(), $player->id));
+            $query = $this->db->execute('UPDATE `<ezrpg>players` SET `last_login`=? WHERE `id`=?', array(time(), $player->id));
             $hash = sha1($player->id . $_SERVER['REMOTE_ADDR'] . SECRET_KEY);
             $_SESSION['userid'] = $player->id;
             $_SESSION['hash'] = $hash;

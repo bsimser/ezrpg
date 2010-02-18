@@ -10,7 +10,7 @@ session_start();
 //header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
 //Show errors?
-//(SHOW_ERRORS == 0)?error_reporting(0):error_reporting(-1);
+(SHOW_ERRORS == 0)?error_reporting(0):error_reporting(E_ALL);
 
 //Constants
 define('CUR_DIR', realpath(dirname(__FILE__)));
@@ -51,7 +51,7 @@ $tpl->config_dir   = CUR_DIR . '/smarty/configs/';
 $tpl->cache_dir    = CUR_DIR . '/smarty/cache/';
 
 //Messages for the user
-if ($_GET['msg'])
+if (isset($_GET['msg']))
 {
     $_msg = trim(stripslashes($_GET['msg']));
     $_msg = $purifier->purify($_msg);
@@ -61,36 +61,42 @@ if ($_GET['msg'])
 
 $player = 0;
 
-//Check if user logged in
-$session_check = sha1($_SESSION['userid'] . $_SERVER['REMOTE_ADDR'] . SECRET_KEY);
-
-if ($_SESSION['hash'] == $session_check)
+if (isset($_SESSION['userid']) && isset($_SESSION['hash']))
 {
-    //Select player details
-    $player = $db->fetchRow('SELECT * FROM `<ezrpg>players` WHERE `id`=?', array($_SESSION['userid']));	
-    $tpl->assign('player', $player);
+    //Check if user logged in
+    $session_check = sha1($_SESSION['userid'] . $_SERVER['REMOTE_ADDR'] . SECRET_KEY);
     
-    //Set logged in flag
-    define('LOGGED_IN', true);
-    $tpl->assign('LOGGED_IN', 'TRUE');
-    
-    //Update last_active value for the player
-    $query = $db->execute('UPDATE `<ezrpg>players` SET `last_active`=? WHERE `id`=?', array(time(), $player->id));
-    
-    //Check for new log messages and send to template
-    $tpl->assign('new_logs', checkLog($player->id, $db));
+    if ($_SESSION['hash'] == $session_check)
+    {
+        //Select player details
+        $player = $db->fetchRow('SELECT * FROM `<ezrpg>players` WHERE `id`=?', array($_SESSION['userid']));	
+        $tpl->assign('player', $player);
+        
+        //Set logged in flag
+        define('LOGGED_IN', true);
+        $tpl->assign('LOGGED_IN', 'TRUE');
+        
+        //Update last_active value for the player
+        $query = $db->execute('UPDATE `<ezrpg>players` SET `last_active`=? WHERE `id`=?', array(time(), $player->id));
+        
+        //Check for new log messages and send to template
+        $tpl->assign('new_logs', checkLog($player->id, $db));
+    }
+    else
+    {
+        if (isset($_SESSION['hash']))
+            unset($_SESSION['hash']);
+        
+        if (isset($_SESSION['userid']))
+            unset($_SESSION['userid']);
+        
+        define('LOGGED_IN', false);
+    }
 }
 else
 {
-    if (isset($_SESSION['hash']))
-        unset($_SESSION['hash']);
-    
-    if (isset($_SESSION['userid']))
-        unset($_SESSION['userid']);
-    
     define('LOGGED_IN', false);
 }
-
 
 //Online players
 $query = $db->fetchRow('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players` WHERE `last_active`>?', array((time()-(60*5))));

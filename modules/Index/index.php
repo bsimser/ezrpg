@@ -6,21 +6,21 @@ defined('IN_EZRPG') or exit;
   Class: Module_Index
   A basic module for the default landing page. Just shows the index template or the player's home page.
 */
-class Module_Index
+class Module_Index extends Base_Module
 {
     /*
-      Function: __construct
+      Function: start
       Renders  either index.tpl or home.tpl with smarty, depending on if the user is logged in.
     */
-    public function __construct(&$db, &$tpl, &$player=0)
+    public function start()
     {
         if (LOGGED_IN)
         {
-            $tpl->display('home.tpl');
+            $this->tpl->display('home.tpl');
         }
         else
         {
-            $tpl->display('index.tpl');
+            $this->tpl->display('index.tpl');
         }
     }
 }
