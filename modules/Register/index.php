@@ -161,7 +161,7 @@ class Module_Register extends Base_Module
             //Add new user to database
             $insert['username'] = $_POST['username'];
             $insert['email'] = $_POST['email'];
-            $insert['secret_key'] = createKey(1024);
+            $insert['secret_key'] = createKey(16);
             $insert['password'] = sha1($insert['secret_key'] . $_POST['password'] . SECRET_KEY);
             $insert['registered'] = time();
             

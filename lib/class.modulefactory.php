@@ -23,7 +23,7 @@ class ModuleFactory
       $module - Name of the module, defaults to Index.
 	
       Returns:
-      A new instance of the module class.
+      A new instance of a module class.
 	
       Shows the Index module if the specified module cannot be found.
       
@@ -33,7 +33,7 @@ class ModuleFactory
     */
     public static function factory(&$db, &$tpl, &$player, $module='Index')
     {
-        if (file_exists (MOD_DIR . '/' . $module . '/index.php'))
+        if (file_exists(MOD_DIR . '/' . $module . '/index.php'))
         {
             include_once (MOD_DIR . '/' . $module . '/index.php');
             $classname = 'Module_' . $module;
@@ -44,6 +44,40 @@ class ModuleFactory
             // Default module to display (the home page)
             include_once (MOD_DIR . '/Index/index.php');
             return new Module_Index($db, $tpl, $player);
+        }
+    }
+    
+    /*
+      Function: adminFactory
+      A factory class for creating admin modules.
+      Basically the same function as <factory>.
+      
+      Parameters:
+      $db - An instance of the database object.
+      $tpl - An instance of the smarty object.
+      $module - Name of the module, defaults to Index.
+      
+      Returns:
+      A new instance of an admin module class.
+      
+      Shows the Admin_Index module if the specified module cannot be found.
+      
+      Example Usage:
+      > $admin_module = ModuleFactory::adminFactory($db, $tpl, $player);
+      > $admin_module->start();
+    */
+    public static function adminFactory(&$db, &$tpl, &$player, $module='Index')
+    {
+        if (file_exists (ADMIN_DIR . '/' . $module . '/index.php'))
+        {
+            include_once (ADMIN_DIR . '/' . $module . '/index.php');
+            $classname = 'Admin_' . $module;
+            return new $classname($db, $tpl, $player);
+        }
+        else
+        {
+            include_once (ADMIN_DIR . '/Index/index.php');
+            return new Admin_Index($db, $tpl, $player);
         }
     }
 }
