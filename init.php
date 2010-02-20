@@ -27,9 +27,9 @@ require_once(CUR_DIR . '/lib.php');
 
 //HTML Purifier Config
 $purifier_config = HTMLPurifier_Config::createDefault();
-$purifier_config->set('HTML', 'Allowed', 'b,a[href],i,span[class],br,em,strong,ul,li');
-$purifier_config->set('URI', 'Base', 'http://localhost/ezrpg');
-$purifier_config->set('URI', 'MakeAbsolute', true);
+$purifier_config->set('HTML.Allowed', 'b,a[href],i,br,em,strong,ul,li');
+$purifier_config->set('URI.Base', $_SERVER['DOCUMENT_ROOT']);
+$purifier_config->set('URI.MakeAbsolute', true);
 
 //Variables
 $purifier = new HTMLPurifier($purifier_config);
@@ -80,7 +80,8 @@ if (isset($_SESSION['userid']) && isset($_SESSION['hash']))
         $tpl->assign('LOGGED_IN', 'TRUE');
         
         //Update last_active value for the player
-        $query = $db->execute('UPDATE `<ezrpg>players` SET `last_active`=? WHERE `id`=?', array(time(), $player->id));
+        if ($player->last_active > time() - 300) //Only update last_active if 5 minutes have passed since last update
+            $query = $db->execute('UPDATE `<ezrpg>players` SET `last_active`=? WHERE `id`=?', array(time(), $player->id));
         
         //Check for new log messages and send to template
         $tpl->assign('new_logs', checkLog($player->id, $db));

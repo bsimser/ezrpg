@@ -24,8 +24,6 @@
 	<ul>
 	<li><a href="index.php">Admin</a></li>
 	<li><a href="index.php?mod=Members">Members</a></li>
-	<li><a href="index.php?mod=Statistics">Statistics</a></li>
-        <li><a href="index.php?mod=Tools">Tools</a></li>
 	<li><a href="../index.php">Back</a></li>
 	<li><a href="../index.php?mod=Logout">Log Out</a></li>
 	</ul>

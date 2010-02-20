@@ -23,7 +23,6 @@ You have no extra stat points to spend.
 <p>
 <strong>Level</strong>: {$player->level}<br />
 <strong>Gold</strong>: {$player->money}<br />
-<strong>Weight Limit</strong>: {$player->weight_limit}<br />
 <br />
 <strong>Strength</strong>: {$player->strength}<br />
 <strong>Vitality</strong>: {$player->vitality}<br />
