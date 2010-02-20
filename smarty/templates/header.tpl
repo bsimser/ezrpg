@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="Distribution" content="Global" />
 <meta name="Robots" content="index,follow" />
-<link rel="stylesheet" href="/ezrpg_hg/static/default/style.css" type="text/css" />	
+<link rel="stylesheet" href="static/default/style.css" type="text/css" />	
 <title>ezRPG :: {$TITLE|default:""}</title>
 </head>
 <body>
@@ -43,9 +43,9 @@
 <strong>Level</strong>: {$player->level}<br />
 <strong>Gold</strong>: {$player->money}<br />
 
-<img src="/ezrpg_hg/bar.php?width=140&type=exp" alt="EXP: {$player->exp} / {$player->max_exp}" /><br />
-<img src="/ezrpg_hg/bar.php?width=140&type=hp" alt="HP: {$player->hp} / {$player->max_hp}" /><br />
-<img src="/ezrpg_hg/bar.php?width=140&type=energy" alt="Energy: {$player->energy} / {$player->max_energy}" /><br />
+<img src="bar.php?width=140&type=exp" alt="EXP: {$player->exp} / {$player->max_exp}" /><br />
+<img src="bar.php?width=140&type=hp" alt="HP: {$player->hp} / {$player->max_hp}" /><br />
+<img src="bar.php?width=140&type=energy" alt="Energy: {$player->energy} / {$player->max_energy}" /><br />
 
 {if $new_logs > 0}
 <a href="index.php?mod=EventLog" class="red"><strong>{$new_logs} New Log Events!</strong></a>

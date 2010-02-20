@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="Distribution" content="Global" />
 <meta name="Robots" content="index,follow" />
-<link rel="stylesheet" href="/ezrpg_hg/static/default/style.css" type="text/css" />	
+<link rel="stylesheet" href="../static/default/style.css" type="text/css" />	
 <title>ezRPG :: {$TITLE|default:""}</title>
 </head>
 <body>
