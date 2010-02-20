@@ -6,7 +6,7 @@ require_once('init.php');
 //$code_length = rand(5,6);
 $code_length = 4;
 $rand_start = mt_rand(0, 250);
-$font = 'fonts/Capture_it.ttf';
+$font = 'static/fonts/Capture_it.ttf';
 $fontSize = 30;
 $padding = 10;
 
