@@ -17,7 +17,7 @@ class Module_EventLog extends Base_Module
         //Require the user to be logged in
         requireLogin();
 	
-        if ($_GET['act'] == 'clear')
+        if (isset($_GET['act']) && $_GET['act'] == 'clear')
         {
             $this->clear();
         }

@@ -4,8 +4,6 @@ defined('IN_EZRPG') or exit;
 
 //Requires
 
-//Config
-require_once (CUR_DIR . '/config.php');
 //Functions
 require_once (LIB_DIR . '/func.log.php');
 require_once (LIB_DIR . '/func.rand.php');

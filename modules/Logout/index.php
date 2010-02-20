@@ -14,6 +14,8 @@ class Module_Logout extends Base_Module
     */
     public function __construct(&$db, &$tpl, &$player=0)
     {
+        unset($_SESSION['hash']);
+        unset($_SESSION['userid']);
         session_unset();
         session_destroy();
 		

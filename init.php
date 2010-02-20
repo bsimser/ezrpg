@@ -9,6 +9,8 @@ session_start();
 //header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 //header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
+require_once 'config.php';
+
 //Show errors?
 (SHOW_ERRORS == 0)?error_reporting(0):error_reporting(E_ALL);
 
@@ -70,7 +72,7 @@ if (isset($_SESSION['userid']) && isset($_SESSION['hash']))
     if ($_SESSION['hash'] == $session_check)
     {
         //Select player details
-        $player = $db->fetchRow('SELECT * FROM `<ezrpg>players` WHERE `id`=?', array($_SESSION['userid']));	
+        $player = $db->fetchRow('SELECT * FROM `<ezrpg>players` WHERE `id`=?', array($_SESSION['userid']));
         $tpl->assign('player', $player);
         
         //Set logged in flag

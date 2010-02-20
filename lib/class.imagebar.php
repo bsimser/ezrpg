@@ -237,14 +237,14 @@ class ImageBar
         $black 	= imagecolorallocate($this->bar, 0, 0, 0);
 		
         // Background
-        imagefill($this->bar, 0, 0, $this->backColor);
+        imagefill($this->bar, 0, 0, $this->backcolor);
         // Fill
         $this->barPercent = $this->bar_w / 100 * $this->dataPercent;
         imagefilledrectangle($this->bar, 0, 0, $this->barPercent, $this->bar_h, $this->fillcolor);
         // Border
         imagerectangle($this->bar, 0, 0, $this->bar_w - 1, $this->bar_h - 1, $grey);
         // Text
-        imagestring($this->bar, $this->fontSize, round(($this->bar_w/2)-((strlen($this->text)*imagefontwidth($this->fontSize))/2), 1), round(($this->bar_h/2)-(imagefontheight($this->fontSize)/2)), $this->text, $white);
+        imagestring($this->bar, $this->fontsize, round(($this->bar_w/2)-((strlen($this->text)*imagefontwidth($this->fontsize))/2), 1), round(($this->bar_h/2)-(imagefontheight($this->fontsize)/2)), $this->text, $white);
 		
 		
         // Output, check for various image type support

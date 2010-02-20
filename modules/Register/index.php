@@ -26,7 +26,7 @@ class Module_Register extends Base_Module
         else
         {
             //If the form was submitted, process it in register().
-            if ($_POST['register'])
+            if (isset($_POST['register']))
                 $this->register();
             else
                 $this->render();
