@@ -48,8 +48,7 @@ class Module_StatPoints extends Base_Module
               //Add to weight limit
               $query = $this->db->execute('UPDATE <ezrpg>players SET
 				stat_points=stat_points-1,
-				strength=strength+1,
-				weight_limit=weight_limit+20
+				strength=strength+1
 				WHERE id=?', array($this->player->id));
               $msg = 'You have increased your strength!';
               break;
