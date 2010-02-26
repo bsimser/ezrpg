@@ -74,14 +74,9 @@ class Module_Register extends Base_Module
             $errors[] = 'You didn\'t enter your username!';
             $error = 1;
         }
-        else if (strlen($_POST['username']) < 3)
+        else if (!isUsername($_POST['username']))
         { //If username is too short...
-            $errors[] = 'Your username must be longer than 3 characters!'; //Add to error message
-            $error = 1; //Set error check
-        }
-        else if (!preg_match("/^[_a-zA-Z0-9]+$/", $_POST['username']))
-        { //If username contains illegal characters...
-            $errors[] = 'Your username may contain only alphanumerical characters! (a-z, A-Z, 0-9)'; //Add to error message
+            $errors[] = 'Your username must be longer than 3 characters and may only contain alphanumerical characters!'; //Add to error message
             $error = 1; //Set error check
         }
         else if ($result->count > 0)
@@ -96,7 +91,7 @@ class Module_Register extends Base_Module
             $errors[] = 'You didn\'t enter a password!';
             $error = 1;
         }
-        else if (strlen($_POST['password']) < 3)
+        else if (!isPassword($_POST['password']))
         { //If password is too short...
             $errors[] = 'Your password must be longer than 3 characters!'; //Add to error message
             $error = 1; //Set error check
@@ -115,12 +110,7 @@ class Module_Register extends Base_Module
             $errors[] = 'You didn\'t enter your email!';
             $error = 1;
         }
-        else if (strlen($_POST['email']) < 3)
-        { //If email is too short...
-            $errors[] = 'Your email must be longer than 3 characters!'; //Add to error message
-            $error = 1; //Set error check
-        }
-        else if (!preg_match("/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`{|}~]+@([-0-9A-Z]+\.)+([0-9A-Z]){2,4}$/i", $_POST['email']))
+        else if (!isEmail($_POST['email']))
         {
             $errors[] = 'Your email format is wrong!'; //Add to error message
             $error = 1; //Set error check

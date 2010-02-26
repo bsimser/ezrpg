@@ -41,7 +41,7 @@ class Module_AccountSettings extends Base_Module
             {
                 $msg = 'The password you entered does not match this account\'s password.';
             }
-            else if (strlen($_POST['new_password']) < 3)
+            else if (!isPassword($_POST['new_password']))
             {
                 $msg = 'Your password must be longer than 3 characters!';
             }

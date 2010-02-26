@@ -8,7 +8,7 @@ defined('IN_EZRPG') or exit;
 */
 
 /*
-  Function: requireLogin()
+  Function: requireLogin
   Checks if the player is logged in. If not, the user is redirected back to the home page.
 
   Parameters:
