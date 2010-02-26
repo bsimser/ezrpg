@@ -4,3 +4,4 @@ syntax: glob
 *.git
 .gitignore
 *.tpl.php
+*.ser
