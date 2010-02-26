@@ -17,14 +17,23 @@ class Module_Members extends Base_Module
         //Require login
         requireLogin();
         
-        $query = $this->db->execute('SELECT `username`, `level` FROM `<ezrpg>players` ORDER BY `id` ASC LIMIT 50');
+        if (isset($_GET['page']))
+            $page = (intval($_GET['page']) > 0) ? intval($_GET['page']) : 0;
+        else
+            $page = 0;
+        
+        $query = $this->db->execute('SELECT `username`, `level` FROM `<ezrpg>players` ORDER BY `id` ASC LIMIT ?,50', array($page * 50));
         $members = Array();
         
         while ($m = $this->db->fetch($query))
         {
             $members[] = $m;
         }
-	
+        
+        $prevpage = (($page - 1) >= 0) ? ($page - 1) : 0;
+        
+        $this->tpl->assign('nextpage', ++$page);
+        $this->tpl->assign('prevpage', $prevpage);
         $this->tpl->assign('members', $members);
         $this->tpl->display('members.tpl');
     }

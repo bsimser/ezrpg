@@ -14,4 +14,12 @@
 {/foreach}
 </table>
 
+<span class="space"></span>
+
+<span style="display: block; width: 90%; text-align: center;">
+<strong>
+<a href="index.php?mod=Members&page={$prevpage}">Previous Page</a> | <a href="index.php?mod=Members&page={$nextpage}">Next Page</a>
+</strong>
+</span>
+
 {include file="footer.tpl"}
