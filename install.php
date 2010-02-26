@@ -41,12 +41,22 @@ FOOT;
 
 if (!isset($_GET['act']))
 {
-    if (!is_writable('config.php'))
+    if (!is_writable('config.php') || !is_writable('smarty/templates_c'))
     {
         displayHeader();
         echo '<h2>Step 1</h2>';
-        echo '<p>Please make sure <strong>config.php</strong> is writable.';
-        echo '<br />Chmod config.php to 0755 or 0777.</p>';
+        echo '<p>Please make sure the following files and folders are writable:';
+        echo '<strong>config.php</strong><br />';
+        echo '<strong>smarty/templates_c</strong><br />';
+        echo '<\p>';
+        echo '<p>';
+        echo 'The below folders are optional to make writable:<br />';
+        echo '<strong>lib/ext/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer</strong>';
+        echo '<strong>lib/ext/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer/HTML</strong>';
+        echo '<strong>lib/ext/htmlpurifier/HTMLPurifier/DefinitionCache/Serializer/URI</strong>';
+        echo '</p>';
+        echo '<p>';
+        echo '<br />Chmod those files and folders to 0755 or 0777.</p>';
         echo '<p><a href="install.php">Click here to check again</a></p>';
         displayFooter();
         exit;
@@ -55,7 +65,7 @@ if (!isset($_GET['act']))
     {
         displayHeader();
         echo '<h2>Step 1</h2>';
-        echo '<p>Config.php has the correct file permissions.</p>';
+        echo '<p>You have given the files/folders the correct file permissions.</p>';
         echo '<p><a href="install.php?act=2">Continue to next step</a></p>';
         displayFooter();
         exit;
