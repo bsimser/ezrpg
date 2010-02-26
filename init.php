@@ -80,7 +80,7 @@ if (isset($_SESSION['userid']) && isset($_SESSION['hash']))
         $tpl->assign('LOGGED_IN', 'TRUE');
         
         //Update last_active value for the player
-        if ($player->last_active > time() - 300) //Only update last_active if 5 minutes have passed since last update
+        if ($player->last_active <= (time() - 300)) //Only update last_active if 5 minutes have passed since last update
             $query = $db->execute('UPDATE `<ezrpg>players` SET `last_active`=? WHERE `id`=?', array(time(), $player->id));
         
         //Check for new log messages and send to template
