@@ -48,7 +48,7 @@ function requireAdmin($player = 0)
 {
     if (!isset($player) || $player->rank < 5)
     {
-        header('Location: ../index.php');
+        header('Location: index.php');
         exit;
     }
 }

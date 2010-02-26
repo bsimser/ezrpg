@@ -4,7 +4,11 @@ define('IN_EZRPG', true);
 require_once '../init.php';
 
 //Require admin rank
-requireAdmin($player);
+if ($player->rank < 5)
+{
+    header('Location: ../index.php');
+    exit;
+}
 
 $default_mod = 'Index';
 

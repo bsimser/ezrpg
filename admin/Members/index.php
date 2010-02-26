@@ -49,7 +49,7 @@ class Admin_Members extends Base_Module
             $members[] = $m;
         }
         
-        $query = $this->db->fetchRow('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players` WHERE `last_active`>0');
+        $query = $this->db->fetchRow('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players`');
         $total_players = $query->count;
         
         $prevpage = (($page - 1) >= 0) ? ($page - 1) : 0;
