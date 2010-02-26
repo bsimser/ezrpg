@@ -54,7 +54,7 @@ $tpl->config_dir   = CUR_DIR . '/smarty/configs/';
 $tpl->cache_dir    = CUR_DIR . '/smarty/cache/';
 
 //Messages for the user
-if (isset($_GET['msg']))
+if (isset($_GET['msg']) && is_string($_GET['msg']))
 {
     $_msg = trim(stripslashes($_GET['msg']));
     $_msg = $purifier->purify($_msg);
