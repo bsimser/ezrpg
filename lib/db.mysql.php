@@ -138,14 +138,14 @@ class Db_mysql
                 {
                     $val = $params[$i];
                     
-                    //magic quotes
-                    if (get_magic_quotes_gpc())
-                    {
-                        $val = stripslashes($val);
-                    }
-                    
                     if (is_string($val))
                     {
+                        //magic quotes
+                        if (get_magic_quotes_gpc())
+                        {
+                            $val = stripslashes($val);
+                        }
+                        
                         //Below conditional has been commented out to enforce types
                         //If a string was passed that was meant to be an integer, you must cast it to an int with intval() first.
                         //Otherwise, strings of numbers will still be passed as a string, and surrounded with single quotes
@@ -183,6 +183,9 @@ class Db_mysql
             
             $this->query = $query;
             
+            if (DEBUG_MODE === 1)
+                echo $query, '<br />';;
+            
             //Execute query
             $result = mysql_query($query, $this->db);
             if ($result === FALSE)
@@ -190,7 +193,7 @@ class Db_mysql
                 $this->error = mysql_error();
 		
                 //If in debug mode, send exception, otherwise ignore
-                if (DEBUG_MODE === 1)
+                if (SHOW_ERRORS === 1)
                 {
                     //Feature: admin logging of errors?
                     $error_msg = '<strong>Query:</strong> <em>' . $this->query . '</em><br /><strong>' . $this->error . '</strong>';
