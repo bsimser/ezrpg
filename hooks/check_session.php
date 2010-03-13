@@ -1,8 +1,8 @@
 <?php
 defined('IN_EZRPG') or exit;
 
-//Add a login hook - check the user session, priority 0
-$hooks->add_hook('login', 'check_session', 0);
+//Add a player object hook - check the user session, priority 0
+$hooks->add_hook('player', 'check_session', 0);
 
 //Player hook to check the session and get player data
 function hook_check_session($db, &$tpl, $player)

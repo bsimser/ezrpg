@@ -71,7 +71,7 @@ foreach($hook_files as $hook_file)
 }
 
 //Run login hooks on player variable
-$player = $hooks->run_hooks('login');
+$player = $hooks->run_hooks('player');
 
 //Run hooks for the start of the page
 $hooks->run_hooks('header');
