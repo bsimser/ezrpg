@@ -16,6 +16,7 @@ require_once (LIB_DIR . '/class.dbfactory.php');
 require_once (LIB_DIR . '/class.imagebar.php');
 require_once (LIB_DIR . '/class.modulefactory.php');
 require_once (LIB_DIR . '/class.base_module.php');
+require_once (LIB_DIR . '/class.hooks.php');
 
 //Exceptions
 require_once (LIB_DIR . '/exception.db.php');

@@ -3,7 +3,7 @@ defined('IN_EZRPG') or exit;
 
 /*
   Title: Validation functions
-  This file contains functions you can use to validate player data - username, password, email, etc.
+  This file contains functions you can use to validate player data: username, password, email, etc.
 */
 
 /*

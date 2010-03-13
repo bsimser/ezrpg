@@ -20,6 +20,7 @@ define('MOD_DIR', CUR_DIR . '/modules');
 define('ADMIN_DIR', CUR_DIR . '/admin');
 define('LIB_DIR', CUR_DIR . '/lib');
 define('EXT_DIR', LIB_DIR . '/ext');
+define('HOOKS_DIR', CUR_DIR . '/hooks');
 
 define('TODAY', date('d F'));
 
@@ -53,58 +54,25 @@ $tpl->compile_dir  = CUR_DIR . '/smarty/templates_c/';
 $tpl->config_dir   = CUR_DIR . '/smarty/configs/';
 $tpl->cache_dir    = CUR_DIR . '/smarty/cache/';
 
-//Messages for the user
-if (isset($_GET['msg']) && is_string($_GET['msg']))
-{
-    $_msg = trim(stripslashes($_GET['msg']));
-    $_msg = $purifier->purify($_msg);
-    if (!empty($_msg))
-        $tpl->assign('GET_MSG', $_msg);
-}
-
+//Initialize $player
 $player = 0;
 
-if (isset($_SESSION['userid']) && isset($_SESSION['hash']))
+//Create a hooks object
+$hooks = new Hooks($db, $tpl, $player);
+
+//Include all hook files
+$hook_files = scandir(HOOKS_DIR);
+
+foreach($hook_files as $hook_file)
 {
-    //Check if user logged in
-    $session_check = sha1($_SESSION['userid'] . $_SERVER['REMOTE_ADDR'] . SECRET_KEY);
-    
-    if ($_SESSION['hash'] == $session_check)
-    {
-        //Select player details
-        $player = $db->fetchRow('SELECT * FROM `<ezrpg>players` WHERE `id`=?', array($_SESSION['userid']));
-        $tpl->assign('player', $player);
-        
-        //Set logged in flag
-        define('LOGGED_IN', true);
-        $tpl->assign('LOGGED_IN', 'TRUE');
-        
-        //Update last_active value for the player
-        if ($player->last_active <= (time() - 300)) //Only update last_active if 5 minutes have passed since last update
-            $query = $db->execute('UPDATE `<ezrpg>players` SET `last_active`=? WHERE `id`=?', array(time(), $player->id));
-        
-        //Check for new log messages and send to template
-        $tpl->assign('new_logs', checkLog($player->id, $db));
-    }
-    else
-    {
-        if (isset($_SESSION['hash']))
-            unset($_SESSION['hash']);
-        
-        if (isset($_SESSION['userid']))
-            unset($_SESSION['userid']);
-        
-        define('LOGGED_IN', false);
-    }
-}
-else
-{
-    define('LOGGED_IN', false);
+    $path_parts = pathinfo(HOOKS_DIR . '/' . $hook_file);
+    if ($path_parts['extension'] == 'php' && $path_parts['basename'] != 'index.php')
+        include_once (HOOKS_DIR . '/' . $hook_file);
 }
 
-//Online players
-$query = $db->fetchRow('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players` WHERE `last_active`>?', array((time()-(60*5))));
-$online = $query->count;
+//Run login hooks on player variable
+$player = $hooks->run_hooks('login');
 
-$tpl->assign('ONLINE', $online);
+//Run hooks for the start of the page
+$hooks->run_hooks('header');
 ?>
