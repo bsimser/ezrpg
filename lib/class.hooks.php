@@ -110,3 +110,4 @@ class Hooks
         return $ret;
     }
 }
+?>
