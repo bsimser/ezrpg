@@ -14,7 +14,13 @@ $default_mod = 'Index';
 
 $module_name = ( (isset($_GET['mod']) && ctype_alnum($_GET['mod'])) ? $_GET['mod'] : $default_mod );
 
-$module = ModuleFactory::adminFactory($db, $tpl, $player, $module_name);
+//Admin header hook
+$hooks->run_hooks('admin_header');
 
+//Begin module
+$module = ModuleFactory::adminFactory($db, $tpl, $player, $module_name);
 $module->start();
+
+//Admin footer hook
+$hooks->run_hooks('admin_footer');
 ?>

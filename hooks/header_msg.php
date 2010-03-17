@@ -11,7 +11,7 @@ function hook_header_msg(&$db, &$tpl, &$player)
     {
         $_msg = trim(stripslashes($_GET['msg']));
         $_msg = $purifier->purify($_msg);
-        if (!empty($_MSG))
+        if (!empty($_msg))
             $tpl->assign('GET_MSG', $_msg);
     }
     
