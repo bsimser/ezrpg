@@ -71,5 +71,5 @@ foreach($hook_files as $hook_file)
 }
 
 //Run login hooks on player variable
-$player = $hooks->run_hooks('player');
+$player = $hooks->run_hooks('player', 0);
 ?>

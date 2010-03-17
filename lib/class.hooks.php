@@ -73,13 +73,31 @@ class Hooks
       
       Parameters:
       $hook_name - The name of the hook to run functions for.
-      $ret - A return value that will be passed to the hook function then returned at the end.
+      $func_args - An array of arguments to pass to the hook functions. Optional.
     */
-    public function run_hooks($hook_name, $ret = '')
+    public function run_hooks()
     {
+        $num_args = func_num_args();
+        if ($num_args == 0)
+            return;
+        
+        //Get function arguments
+        $arg_list = func_get_args();
+        
+        $hook_name = $arg_list[0];
+        
+        $func_args = 0;
+        
+        if ($num_args == 2)
+        {
+            //Single argument or an rrray of arguments to pass to hook functions
+            $func_args = $arg_list[1];
+        }
+        
+        
         //This hook doesn't exist!
         if (!array_key_exists($hook_name, $this->hooks))
-            return;
+            return $func_args;
         
         foreach($this->hooks[$hook_name] as $priority)
         {
@@ -87,27 +105,23 @@ class Hooks
             sort($priority);
             
             //Call each hook function separately
-            foreach($priority as $key=>$hook_function)
+            foreach($priority as $hook_function)
             {
+                $call_func = 'hook_' . $hook_function;
+                
                 //Debug mode? Show what's going on
                 if (DEBUG_MODE == 1)
-                    echo 'Calling hook: ', $hook_function, '<br />';
+                    echo 'Calling hook: ', $call_func, '<br />';
                 
-                //Call the function
-                if ($ret != '')
-                {
-                    //Hook should have a return value
-                    $ret = call_user_func('hook_' . $hook_function, $this->db, $this->tpl, $this->player, $ret);
-                }
-                else
-                {
-                    //No return value needed
-                    $ret = call_user_func('hook_' . $hook_function, $this->db, $this->tpl, $this->player);
-                }
+                if (!function_exists($call_func))
+                    continue;
+
+                //Hook should have a return value
+                $func_args = call_user_func($call_func, $this->db, $this->tpl, $this->player, $func_args);
             }
         }
         
-        return $ret;
+        return $func_args;
     }
 }
 ?>

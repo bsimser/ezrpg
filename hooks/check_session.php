@@ -5,7 +5,7 @@ defined('IN_EZRPG') or exit;
 $hooks->add_hook('player', 'check_session', 0);
 
 //Player hook to check the session and get player data
-function hook_check_session($db, &$tpl, $player)
+function hook_check_session($db, &$tpl, $player, $args = 0)
 {
     if (isset($_SESSION['userid']) && isset($_SESSION['hash']))
     {

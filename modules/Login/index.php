@@ -55,7 +55,7 @@ class Module_Login extends Base_Module
             global $hooks;
             
             //Run login hook
-            $hooks->run_hooks('login');
+            $player = $hooks->run_hooks('login', $player);
             
             $query = $this->db->execute('UPDATE `<ezrpg>players` SET `last_login`=? WHERE `id`=?', array(time(), $player->id));
             $hash = sha1($player->id . $_SERVER['REMOTE_ADDR'] . SECRET_KEY);

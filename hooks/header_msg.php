@@ -3,7 +3,7 @@ defined('IN_EZRPG') or exit;
 
 $hooks->add_hook('header', 'header_msg', 1);
 
-function hook_header_msg(&$db, &$tpl, &$player)
+function hook_header_msg(&$db, &$tpl, &$player, $args = 0)
 {
     global $purifier;
     
@@ -15,6 +15,6 @@ function hook_header_msg(&$db, &$tpl, &$player)
             $tpl->assign('GET_MSG', $_msg);
     }
     
-    return;
+    return $args;
 }
 ?>
