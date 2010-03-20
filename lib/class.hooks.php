@@ -102,7 +102,7 @@ class Hooks
         foreach($this->hooks[$hook_name] as $priority)
         {
             //Sort by priority
-            sort($priority);
+            ksort($priority);
             
             //Call each hook function separately
             foreach($priority as $hook_function)
