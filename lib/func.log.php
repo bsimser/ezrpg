@@ -32,7 +32,7 @@ function addLog($player, $msg, &$db)
     $insert['time'] = time();
     $insert['message'] = $msg;
 	
-    return $db->insert($insert);
+    return $db->insert('<ezrpg>player_log', $insert);
 }
 
 /*

@@ -28,7 +28,7 @@ class Module_EventLog extends Base_Module
             $logs = Array();
             if ($this->db->numRows($query) > 0)
             {
-                while($l = $db->fetch($query))
+                while($l = $this->db->fetch($query))
                 {
                     $logs[] = $l;
                 }
