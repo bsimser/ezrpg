@@ -1,7 +1,7 @@
 Thanks for downloading ezRPG!
 
 Installation instructions:
-1. Upload all files (you can exclude the Docs folder if you want).
+1. Upload all files.
 2. Give read/write permission to:
    * config.php
    * smarty/templates_c
@@ -15,6 +15,8 @@ License:
 ezRPG is free and open source under the GNU General Public License version 3.
 See license.txt for the full license text.
 
-ezRPG
+
+ezRPG 1.0
+Check our website's forum for support and free modules for your game!
 http://www.ezrpgproject.com
 http://code.google.com/p/ezrpg/
