@@ -51,26 +51,54 @@ class DbException extends Exception
           default:
               break;
         }
-		
-        $ret = '<html>';
-        $ret .= '<head>';
-        $ret .= '<title>ezRPG Error!</title>';
-        $ret .= '<style>';
-        $ret .= '#error { width: 50%; margin: auto; font: 0.8em  Verdana, Arial, Sans-serif; color: #666; padding: 10px; border: 1px solid #3182C0; }';
-        $ret .= '</style>';
-        $ret .= '</head>';
-        $ret .= '<body>';
-        $ret .= '<div id="error">';
-        $ret .= '<h1>ezRPG</h1>';
-        $ret .= '<p><strong>Error: ' . __CLASS__ . '!</strong><br />';
-        $ret .= '<strong>File</strong>: ' . $this->file . '<br />';
-        $ret .= '<strong>Line</strong>: ' . $this->line . '<br /><br />';
-        $ret .= $this->message;
-        $ret .= '<br /><br />';
-        $ret .= '<strong>Stack Trace:</strong><br />';
-        $ret .= nl2br($this->getTraceAsString());
-        $ret .= '</p></div>';
-        $ret .= '</body></html>';
+
+        $trace = nl2br($this->getTraceAsString());
+        $this_class = __CLASS__;
+
+        //Output message
+        $ret = <<<OUT
+<html>
+<head>
+<title>ezRPG Error!</title>
+<style>
+#error { width: 50%; margin: auto; font: 0.8em  Verdana, Arial, Sans-serif; color: #666; padding: 10px; border: 1px solid #3182C0; }
+</style>
+</head>
+<body>
+<div id="error">
+<h1>ezRPG</h1>
+<p><strong>Error: $this_class!</strong><br />
+OUT;
+
+        //Only show line number and file if debug mode is on
+        if (DEBUG_MODE)
+        {
+            $ret .= <<<OUT
+<strong>File</strong>: $this->file<br />
+<strong>Line</strong>: $this->line<br />
+OUT;
+        }
+
+        //The error message itself
+        $ret .= <<<OUT
+<br />
+$this->message
+OUT;
+
+        //Only show stack trace if debug mode is on
+        if (DEBUG_MODE)
+        {
+            $ret .= <<<OUT
+<br /><br />
+<strong>Stack Trace:</strong><br />
+$trace
+OUT;
+        }
+
+        $ret .= <<<OUT
+</p></div>
+</body></html>
+OUT;
 		
         die($ret);
     }
