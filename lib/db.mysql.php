@@ -238,12 +238,37 @@ class Db_mysql
         $ret = mysql_fetch_object($result);
         return $ret;
     }
+
+    /*
+      Function: fetchArray
+      Fetches the data from the result set and returns it as an array.
+
+      Parameters:
+      $result - A result set from an SQL query.
+
+      Returns:
+      An array with the query results.
+
+      Example Usage:
+      > $query = $db->execute('SELECT COUNT(`id`) AS `count` FROM `<ezrpg>players`');
+      > $result = $db->fetchArray($query);
+      > echo $result['count'];
+
+      See Also:
+      - <execute>
+      - <fetch>
+    */
+    public function fetchArray(&$result)
+    {
+        $ret = mysql_fetch_array($result);
+        return $ret;
+    }
 	
     /*
       Function: fetchRow
       Combines <execute> and <fetch> to a single function for fetching single rows of data.
 	
-      Equivalent to using mysql_fetch_array(mysql_query($query)).
+      Equivalent to using mysql_fetch_object(mysql_query($query)).
 	
       After the row is fetched, all memory associated with the result is freed with mysql_free_result().
 	
