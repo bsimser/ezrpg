@@ -18,6 +18,9 @@ class Module_Logout extends Base_Module
         unset($_SESSION['userid']);
         session_unset();
         session_destroy();
+
+        global $hooks;
+        $hooks->run_hooks('logout');
 		
         $msg = 'You have been logged out!';
         header('Location: index.php?msg=' . urlencode($msg));

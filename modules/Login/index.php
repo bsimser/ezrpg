@@ -61,6 +61,8 @@ class Module_Login extends Base_Module
             $hash = sha1($player->id . $_SERVER['REMOTE_ADDR'] . SECRET_KEY);
             $_SESSION['userid'] = $player->id;
             $_SESSION['hash'] = $hash;
+
+            $hooks->run_hooks('login_after', $player);
             
             header('Location: index.php');
             exit;

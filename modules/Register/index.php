@@ -154,9 +154,15 @@ class Module_Register extends Base_Module
             $insert['secret_key'] = createKey(16);
             $insert['password'] = sha1($insert['secret_key'] . $_POST['password'] . SECRET_KEY);
             $insert['registered'] = time();
+
+            global $hooks;
+            //Run register hook
+            $insert = $hooks->run_hooks('register', $insert);
             
             $new_player = $this->db->insert('<ezrpg>players', $insert);
             //Use $new_player to find their new ID number.
+
+            $hooks->run_hooks('register_after', $new_player);
             
             $msg = 'Congratulations, you have registered! Please login now to play!';
             header('Location: index.php?msg=' . urlencode($msg));
