@@ -99,11 +99,11 @@ class Hooks
         if (!array_key_exists($hook_name, $this->hooks))
             return $func_args;
         
+        //Sort by priority
+        ksort($this->hooks[$hook_name]);
+
         foreach($this->hooks[$hook_name] as $priority)
         {
-            //Sort by priority
-            ksort($priority);
-            
             //Call each hook function separately
             foreach($priority as $hook_function)
             {
