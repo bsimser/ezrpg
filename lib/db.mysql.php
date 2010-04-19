@@ -334,6 +334,9 @@ class Db_mysql
     */
     public function insert($table, $data)
     {
+        if ($this->isConnected === false)
+            $this->connect();
+
         $table = str_replace('<ezrpg>', DB_PREFIX, $table);
         $query = 'INSERT INTO ' . mysql_real_escape_string($table, $this->db) . ' (';
 		
