@@ -10,6 +10,10 @@ Installation instructions:
 
 Admin panel is located in the sub-folder /admin
 
+Upgrade instructions:
+This only applies to upgrading from the release candidate 3 (RC3) to version 1.0.
+1. Upload all files EXCEPT: config.php, install.php
+2. That's it!
 
 License:
 ezRPG is free and open source under the GNU General Public License version 3.
