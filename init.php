@@ -22,21 +22,10 @@ define('LIB_DIR', CUR_DIR . '/lib');
 define('EXT_DIR', LIB_DIR . '/ext');
 define('HOOKS_DIR', CUR_DIR . '/hooks');
 
-define('TODAY', date('d F'));
-
 require_once(CUR_DIR . '/lib.php');
 
-//HTML Purifier Config
-$purifier_config = HTMLPurifier_Config::createDefault();
-$purifier_config->set('HTML.Allowed', 'b,a[href],i,br,em,strong,ul,li');
-$purifier_config->set('URI.Base', $_SERVER['DOCUMENT_ROOT']);
-$purifier_config->set('URI.MakeAbsolute', true);
-$purifier_config->set('URI.DisableExternal', true);
 
-//Variables
-$purifier = new HTMLPurifier($purifier_config);
-$tpl = new Smarty();
-
+//Database
 try
 {
     $db = DbFactory::factory($config_driver, $config_server, $config_username, $config_password, $config_dbname);
@@ -49,7 +38,18 @@ catch (DbException $e)
 //Database password no longer needed, unset variable
 unset($config_password);
 
+
+//HTML Purifier Config
+$purifier_config = HTMLPurifier_Config::createDefault();
+$purifier_config->set('HTML.Allowed', 'b,a[href],i,br,em,strong,ul,li');
+$purifier_config->set('URI.Base', $_SERVER['DOCUMENT_ROOT']);
+$purifier_config->set('URI.MakeAbsolute', true);
+$purifier_config->set('URI.DisableExternal', true);
+$purifier = new HTMLPurifier($purifier_config);
+
+
 //Smarty
+$tpl = new Smarty();
 $tpl->template_dir = CUR_DIR . '/smarty/templates/';
 $tpl->compile_dir  = CUR_DIR . '/smarty/templates_c/';
 $tpl->config_dir   = CUR_DIR . '/smarty/configs/';

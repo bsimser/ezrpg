@@ -18,7 +18,7 @@ class Module_StatPoints extends Base_Module
         requireLogin();
 		
         //If the form was submitted, process it in register().
-        if ($_POST['stat'] && $this->player->stat_points > 0)
+        if (isset($_POST['stat']) && $this->player->stat_points > 0)
         {
             $this->spend();
         }
