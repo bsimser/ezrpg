@@ -47,6 +47,6 @@ define('SECRET_KEY', '692SdIZ3wVm?xzCod9r:zK]#');
 */
 define('DB_PREFIX', 'ezrpg_');
 define('VERSION', '1.0');
-define('SHOW_ERRORS', 1);
+define('SHOW_ERRORS', 0);
 define('DEBUG_MODE', 0);
 ?>
