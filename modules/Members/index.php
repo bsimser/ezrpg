@@ -23,12 +23,7 @@ class Module_Members extends Base_Module
             $page = 0;
         
         $query = $this->db->execute('SELECT `username`, `level` FROM `<ezrpg>players` ORDER BY `id` ASC LIMIT ?,50', array($page * 50));
-        $members = Array();
-        
-        while ($m = $this->db->fetch($query))
-        {
-            $members[] = $m;
-        }
+        $members = $this->db->fetchAll($query);
         
         $prevpage = (($page - 1) >= 0) ? ($page - 1) : 0;
         

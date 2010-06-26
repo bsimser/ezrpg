@@ -25,14 +25,7 @@ class Module_EventLog extends Base_Module
         {
             //Retrieve all log messages
             $query = $this->db->execute('SELECT `time`, `message`, `status` FROM `<ezrpg>player_log` WHERE `player`=? ORDER BY `time` DESC LIMIT 10', array($this->player->id));
-            $logs = Array();
-            if ($this->db->numRows($query) > 0)
-            {
-                while($l = $this->db->fetch($query))
-                {
-                    $logs[] = $l;
-                }
-            }
+            $logs = $this->db->fetchAll($query);
             
             //Update log message statuses to old/read (status value: 1)
             $this->db->execute('UPDATE `<ezrpg>player_log` SET `status`=1 WHERE `player`=?', array($this->player->id));

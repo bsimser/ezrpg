@@ -94,8 +94,8 @@ class Db_mysql
 	
       Returns:
       The result of the SQL query. Either a resource or a boolean.
-	
-      On failure, it throws a <DbException> with the MySQL error.
+      On a failed query, it returns false.
+      On an SQL error, it throws a <DbException> with the MySQL error.
 	
       Example Usage:
       > $query = $db->execute('SELECT username FROM <ezrpg>players WHERE id=?', array($player->id));
@@ -188,7 +188,7 @@ class Db_mysql
             
             //Execute query
             $result = mysql_query($query, $this->db);
-            if ($result === FALSE)
+            if ($result === false)
             { //If there was an error with the query
                 $this->error = mysql_error();
 		
@@ -200,7 +200,7 @@ class Db_mysql
                     throw new DbException($error_msg, SQL_ERROR);
                 }
 		
-                return 0;
+                return false;
             }
         }
         catch (SQLException $e)
@@ -261,6 +261,49 @@ class Db_mysql
     public function fetchArray(&$result)
     {
         $ret = mysql_fetch_array($result);
+        return $ret;
+    }
+
+    /*
+      Function: fetchAll
+      Fetches all the data from a result set and returns it as an array of results.
+
+      Parameters:
+      $result - A result set from an SQL query.
+      $return_array - Boolean to return the result as arrays or objects.
+
+      Returns:
+      An array of arrays/objects from query results.
+      On a failed query, returns false.
+
+      Example Usage:
+      > $query = $db->execute('SELECT `id` FROM `<ezrpg>players`');
+      > $results = $db->fetchAll($query);
+      > foreach ($results as $row)
+      >   echo $row->id;
+
+      See Also:
+      - <execute>
+      - <fetch>
+      - <fetchArray>
+   */
+    public function fetchAll(&$result, $return_array = false)
+    {
+        $ret = array();
+
+        if ($result === false)
+            return $ret;
+
+        if ($return_array === true)
+        {
+            while ($row = $this->fetchArray($result))
+                $ret[] = $row;
+        }
+        else
+        {
+            while ($row = $this->fetch($result))
+                $ret[] = $row;
+        }
         return $ret;
     }
 	
